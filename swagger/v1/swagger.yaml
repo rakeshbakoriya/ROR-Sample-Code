@@ -1,0 +1,187 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "API V1",
+    "version": "v1"
+  },
+  "paths": {
+    "/api/v1/books": {
+      "get": {
+        "summary": "Users can search books",
+        "tags": [
+          "Search Books"
+        ],
+        "description": "Users can search books by (Book title and description and User name) or (Query)",
+        "parameters": [
+          {
+            "name": "book[title]",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "book[description]",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "user[name]",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "query",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "example": [
+                  {
+                    "id": 1,
+                    "title": "Harry Potter",
+                    "author": "J. K. Rowling",
+                    "publisher": "Bloomsbury Publishing",
+                    "genre": "Fantasy, drama, young adult fiction",
+                    "description": "Harry Potter is a series of seven fantasy novels written by British author J. K. ... The novels chronicle the lives of a young wizard, Harry Potter, and his friends Hermione Granger and Ron Weasley, all of whom are students at Hogwarts School of Witchcraft and Wizardry.",
+                    "created_at": "2021-07-25T04:59:30.051+09:00",
+                    "updated_at": "2021-07-25T04:59:30.051+09:00"
+                  },
+                  {
+                    "id": 2,
+                    "title": "The Lord of the Rings",
+                    "author": "Tolkien, Tolkien's",
+                    "publisher": "Allen & Unwin",
+                    "genre": "Novel, Heroic fantasy, Fantasy comedy",
+                    "description": "The novel, set in the Third Age of Middle-earth, formed a sequel to Tolkien's The Hobbit (1937) and was succeeded by his posthumous The Silmarillion (1977). The Lord of the Rings is the saga of a group of sometimes reluctant heroes who set forth to save their world from consummate evil.",
+                    "created_at": "2021-07-25T04:59:30.124+09:00",
+                    "updated_at": "2021-07-25T04:59:30.124+09:00"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/user_books": {
+      "post": {
+        "summary": "Users can register their own books",
+        "tags": [
+          "Book Registration"
+        ],
+        "description": "Users can register own multiple books",
+        "parameters": [
+
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": true,
+                  "errors": [
+
+                  ],
+                  "user_book": {
+                    "user": {
+                      "id": 1,
+                      "name": "String",
+                      "email": "String",
+                      "created_at": "2021-07-25 04:59:30 +0900",
+                      "updated_at": "2021-07-25 04:59:30 +0900"
+                    },
+                    "book": {
+                      "id": 1,
+                      "title": "String",
+                      "author": "String",
+                      "publisher": "String",
+                      "genre": "String",
+                      "description": "Text",
+                      "created_at": "2021-07-25 04:59:30 +0900",
+                      "updated_at": "2021-07-25 04:59:30 +0900"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "message": "Reocrd not Found"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": " Unprocessable Entity",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "message": [
+                        "User has already been taken"
+                      ]
+                    }
+                  ],
+                  "success": false
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "user_id": {
+                    "type": "integer"
+                  },
+                  "book_id": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "user_id",
+                  "book_id"
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000/",
+      "variables": {
+        "defaultHost": {
+          "default": "http://localhost:3000/"
+        }
+      }
+    }
+  ]
+}

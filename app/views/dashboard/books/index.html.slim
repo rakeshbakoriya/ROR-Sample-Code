@@ -1,0 +1,62 @@
+.main-content
+  .container-fluid
+    .header
+      .header-body
+        .row.align-items-end
+          .col
+            .header-pretitle
+              h6 = t('.heading_sub')
+            h1.header-title = Book.model_name.human
+          .col-auto
+            = link_to t('.csv'), dashboard_books_path(book: @search_query, format: :csv), class: 'btn btn-info lift ml-3'
+
+    .row.mt-4
+      .col-12
+        .card
+          .table-responsive
+            table.table.table-sm.card-table
+              thead
+                tr
+                  th
+                    .d-flex
+                      .mr-2 = Book.human_attribute_name(:id)
+                      = render 'table_shortable'
+                  th
+                    .d-flex
+                      .mr-2 = Book.human_attribute_name(:title)
+                      = render 'table_shortable'
+                  th
+                    .d-flex
+                      .mr-2 = Book.human_attribute_name(:author)
+                      = render 'table_shortable'
+                  th
+                    .d-flex
+                      .mr-2 = Book.human_attribute_name(:publisher)
+                      = render 'table_shortable'
+                  th
+                    .d-flex
+                      .mr-2 = Book.human_attribute_name(:genre)
+                      = render 'table_shortable'
+                  th
+                    .d-flex
+                      .mr-2 = Book.human_attribute_name(:created_at)
+                      = render 'table_shortable'
+                  th
+                    .d-flex
+                      .mr-2 = Book.human_attribute_name(:updated_at)
+                      = render 'table_shortable'
+                  th
+              tbody
+                - @books.each do |book|
+                  tr
+                    td = book.id
+                    td = book.title
+                    td = book.author
+                    td = book.publisher
+                    td = book.genre
+                    td = book.created_at
+                    td = book.updated_at
+                    td = link_to t('.show'), dashboard_book_path(book), class: 'btn btn-primary btn-sm'
+                    td = link_to "Users", dashboard_book_users_path(book), class: 'btn btn-primary btn-sm'
+
+        = paginate @books, views_prefix: 'dashboard'

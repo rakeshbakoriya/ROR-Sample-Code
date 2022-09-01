@@ -1,0 +1,4 @@
+- if params[:d].present? && params[:d].include?('asc') && params[:o].include?('id')
+  = link_to '⋀', dashboard_admin_users_path(order_params('id', 'desc'))
+- else
+  = link_to '⋁', dashboard_admin_users_path(order_params('id', 'asc'))

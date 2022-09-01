@@ -1,0 +1,4 @@
+- if params[:d].present? && params[:d].include?('asc') && params[:o].include?('id')
+  = link_to '⋀', params[:book_id].present? ? dashboard_book_users_path(params[:book_id], order_params('id', 'desc')) : dashboard_users_path(order_params('id', 'desc'))
+- else
+  = link_to '⋁', params[:book_id].present? ? dashboard_book_users_path(params[:book_id], order_params('id', 'asc')) : dashboard_users_path(order_params('id', 'asc'))

@@ -1,0 +1,2 @@
+class BlacklistedAuthToken < ApplicationRecord
+end

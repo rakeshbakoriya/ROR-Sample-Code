@@ -1,0 +1,68 @@
+.main-content
+  .container-fluid
+    .header
+      .header-body
+        .row.d-flex.justify-content-between
+          .col
+            .header-pretitle
+              h6 = t('.heading_sub')
+            h1.header-title = Book.model_name.human
+          .mx-4.pt-2
+            = render 'dashboard/common/breadcrumb', data: [{ text: 'Books', link: '/dashboard/books' }, { text: 'View Book', link: "/dashboard/books/#{@book.id}" }]
+
+    .row.justify-content-center
+      .col-12.col-lg-10.col-xl-8
+        .card
+          .card-header
+            .row.align-items-center
+              .col
+                h4.card-header-title = "#{Book.model_name.human}"
+              .col-auto
+                = link_to "Users", dashboard_book_users_path(@book), class: 'btn btn-primary btn-sm'
+
+          .card-body
+            .list-group.list-group-flush.my-n3
+
+              .list-group-item
+                .row.align-items-center
+                  .col
+                    .font-weight-base.mb-1 = Book.human_attribute_name(:title)
+                  .col-auto
+                    = @book.title
+              .list-group-item
+                .row.align-items-center
+                  .col
+                    .font-weight-base.mb-1 = Book.human_attribute_name(:author)
+                  .col-auto
+                    = @book.author
+              .list-group-item
+                .row.align-items-center
+                  .col
+                    .font-weight-base.mb-1 = Book.human_attribute_name(:publisher)
+                  .col-auto
+                    = @book.publisher
+              .list-group-item
+                .row.align-items-center
+                  .col
+                    .font-weight-base.mb-1 = Book.human_attribute_name(:genre)
+                  .col-auto
+                    = @book.genre
+              .list-group-item
+                .row.align-items-center
+                  .col
+                    .font-weight-base.mb-1 = Book.human_attribute_name(:created_at)
+                  .col-auto
+                    = @book.created_at
+              .list-group-item
+                .row.align-items-center
+                  .col
+                    .font-weight-base.mb-1 = Book.human_attribute_name(:updated_at)
+                  .col-auto
+                    = @book.updated_at
+              .list-group-item
+                .row.align-items-center
+                  .col
+                    .font-weight-base.mb-1 = Book.human_attribute_name(:description)
+                  .col-auto
+                    = @book.description
+              
